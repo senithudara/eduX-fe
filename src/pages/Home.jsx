@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import StudentDetails from "../components/StudentDetails";
-import EnrolledCorses from "../components/EnrolledCorses";
+import Navbar from "../components/Header";
+import StudentDetails from "../components/StudentProfiel";
+import EnrolledCorses from "../components/EnrolledCourses";
 import Footer from "../components/Footer";
 
 const Home = () => {

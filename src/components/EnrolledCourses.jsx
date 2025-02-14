@@ -133,9 +133,7 @@ const EnrolledCourses = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             My Enrolled Courses
           </h1>
-          <p className="text-gray-600">
-            Manage and track your educational journey
-          </p>
+          <p className="text-gray-600">See and manage your enrolled courses </p>
         </div>
 
         {courses.length > 0 ? (

@@ -154,7 +154,7 @@ const Courses = () => {
           Available Courses
         </h1>
         <p className="text-gray-600 mb-8">
-          Explore our selection of courses and start learning today
+          View all our courses and get enrolled in them
         </p>
 
         {courses.length > 0 ? (

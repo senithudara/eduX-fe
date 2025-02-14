@@ -1,16 +1,18 @@
-import React from 'react'
-import Courses from '../components/Courses'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import React from "react";
+import Courses from "../components/Courses";
+import EnrolledCourses from "../components/EnrolledCourses";
+import Navbar from "../components/Header";
+import Footer from "../components/Footer";
 
 const CoursesPage = () => {
   return (
     <div>
-      <Navbar/>
-      <Courses/>
-      <Footer/>
+      <Navbar />
+      <Courses />
+      <EnrolledCourses />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default CoursesPage
+export default CoursesPage;
