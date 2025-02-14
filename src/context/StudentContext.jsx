@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useCallback } from "react";
 import axios from "axios";
 
-// creating the StudentContext
+// StudentContext
 export const StudentContext = createContext();
 
 // creating a provider for the StudentContext
@@ -9,8 +9,8 @@ export const StudentProvider = ({ children }) => {
   const [student, setStudent] = useState(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  F;
-  // fetching student details
+
+  // fetch student details
   const fetchStudentDetails = useCallback(async () => {
     if (student) return;
 
@@ -47,4 +47,5 @@ export const StudentProvider = ({ children }) => {
   );
 };
 
+// to access the StudentContext
 export const useStudent = () => useContext(StudentContext);
