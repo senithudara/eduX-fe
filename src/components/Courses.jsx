@@ -40,7 +40,7 @@ const Courses = () => {
 
     fetchCourses();
   }, []);
-  //check if the student already is enrolled in courses, fetch all enrolled courses
+
   useEffect(() => {
     if (student?.student?.id) {
       const fetchEnrolledCourses = async () => {
@@ -158,52 +158,71 @@ const Courses = () => {
         </p>
 
         {courses.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {courses.map((course) => {
-              const isEnrolled = enrolledCourses.includes(course.id);
-              return (
-                <div
-                  key={course.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-                >
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <h2 className="text-xl font-semibold text-gray-900">
-                        {course.name}
-                      </h2>
-                      <div className="bg-green-100 text-green-500 p-2 rounded-full">
-                        <FaBookOpen className="h-5 w-5" />
-                      </div>
-                    </div>
-
-                    <p className="text-gray-600 mb-6">{course.description}</p>
-
-                    <button
-                      className={`w-full py-2 px-4 rounded-lg font-medium transition-colors ${
-                        isEnrolled
-                          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                          : enrollingCourseId === course.id
-                          ? "bg-green-100 text-green-600 cursor-wait"
-                          : "bg-green-500 text-white hover:bg-green-600"
-                      }`}
-                      onClick={() => handleEnroll(course.id)}
-                      disabled={isEnrolled || enrollingCourseId === course.id}
-                    >
-                      {isEnrolled ? (
-                        "Enrolled"
-                      ) : enrollingCourseId === course.id ? (
-                        <div className="flex items-center justify-center gap-2">
-                          <FaSpinner className="h-4 w-4 animate-spin" />
-                          <span>Enrolling...</span>
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white">
+              <thead>
+                <tr>
+                  <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                    Course Name
+                  </th>
+                  <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                    Description
+                  </th>
+                  <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                    Duration
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((course) => {
+                  const isEnrolled = enrolledCourses.includes(course.id);
+                  return (
+                    <tr key={course.id}>
+                      <td className="py-6 px-4 border-b border-gray-200">
+                        <div className="flex items-center">
+                          <div className="bg-green-100 text-green-500 p-2 rounded-full mr-2">
+                            <FaBookOpen className="h-5 w-5" />
+                          </div>
+                          <span className="text-gray-900">{course.name}</span>
                         </div>
-                      ) : (
-                        "Enroll Now"
-                      )}
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+                      </td>
+                      <td className="py-2 px-4 border-b border-gray-200">
+                        <span className="text-gray-600">
+                          {course.description}
+                        </span>
+                      </td>
+
+                      <td className="py-2 px-4 border-b border-gray-200">
+                        <button
+                          className={`py-1 px-3 rounded-lg font-medium transition-colors ${
+                            isEnrolled
+                              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                              : enrollingCourseId === course.id
+                              ? "bg-green-100 text-green-600 cursor-wait"
+                              : "bg-green-500 text-white hover:bg-green-600"
+                          }`}
+                          onClick={() => handleEnroll(course.id)}
+                          disabled={
+                            isEnrolled || enrollingCourseId === course.id
+                          }
+                        >
+                          {isEnrolled ? (
+                            "Enrolled"
+                          ) : enrollingCourseId === course.id ? (
+                            <div className="flex items-center justify-center gap-2">
+                              <FaSpinner className="h-4 w-4 animate-spin" />
+                              <span>Enrolling...</span>
+                            </div>
+                          ) : (
+                            "Enroll Now"
+                          )}
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         ) : (
           <div className="text-left py-12">

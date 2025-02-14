@@ -129,68 +129,79 @@ const EnrolledCourses = () => {
       )}
 
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            My Enrolled Courses
-          </h1>
-          <p className="text-gray-600">See and manage your enrolled courses </p>
-        </div>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          My Enrolled Courses
+        </h1>
+        <p className="text-gray-600 mb-8">
+          See and manage your enrolled courses
+        </p>
 
         {courses.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {courses.map((course) => (
-              <div
-                key={course.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-gray-900">
-                      {course.name}
-                    </h2>
-                    <div className="bg-green-100 text-green-500 p-2 rounded-full">
-                      <FaBookOpen className="h-5 w-5" />
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 mb-6">{course.description}</p>
-
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <FaCalendarAlt className="h-4 w-4 mr-1" />
-                      <span>
-                        Enrolled:{" "}
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white">
+              <thead>
+                <tr>
+                  <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                    Course Name
+                  </th>
+                  <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                    Description
+                  </th>
+                  <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                    Enrolled Date
+                  </th>
+                  <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((course) => (
+                  <tr key={course.id}>
+                    <td className="py-6 px-4 border-b border-gray-200">
+                      <div className="flex items-center">
+                        <div className="bg-green-100 text-green-500 p-2 rounded-full mr-2">
+                          <FaBookOpen className="h-5 w-5" />
+                        </div>
+                        <span className="text-gray-900">{course.name}</span>
+                      </div>
+                    </td>
+                    <td className="py-2 px-4 border-b border-gray-200">
+                      <span className="text-gray-600">
+                        {course.description}
+                      </span>
+                    </td>
+                    <td className="py-2 px-4 border-b border-gray-200">
+                      <span className="text-gray-600">
                         {new Date(
                           course.enrollmentDate || Date.now()
                         ).toLocaleDateString()}
                       </span>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => handleUnroll(course.id)}
-                    disabled={unrollingCourseId === course.id}
-                    className={`w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg font-medium transition-colors ${
-                      unrollingCourseId === course.id
-                        ? "bg-red-100 text-red-600 cursor-wait"
-                        : "bg-red-500 text-white hover:bg-red-600"
-                    }`}
-                  >
-                    {unrollingCourseId === course.id ? (
-                      <>
-                        <FaSpinner className="h-4 w-4 animate-spin" />
-                        <span>Unrolling...</span>
-                      </>
-                    ) : (
-                      <>
-                        <FaBook className="h-4 w-4" />
-                        <span>Unroll from Course</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
-            ))}
+                    </td>
+                    <td className="py-2 px-4 border-b border-gray-200">
+                      <button
+                        onClick={() => handleUnroll(course.id)}
+                        disabled={unrollingCourseId === course.id}
+                        className={`py-1 px-3 rounded-lg font-medium transition-colors ${
+                          unrollingCourseId === course.id
+                            ? "bg-red-100 text-red-600 cursor-wait"
+                            : "bg-red-500 text-white hover:bg-red-600"
+                        }`}
+                      >
+                        {unrollingCourseId === course.id ? (
+                          <div className="flex items-center justify-center gap-2">
+                            <FaSpinner className="h-4 w-4 animate-spin" />
+                            <span>Unrolling...</span>
+                          </div>
+                        ) : (
+                          "Unroll"
+                        )}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         ) : (
           <div className="text-left py-12 bg-white rounded-lg shadow-sm">
